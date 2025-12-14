@@ -122,7 +122,7 @@ README.md                # Project documentation
 
 ## 📌 Possible Enhancements
 
-* ⭐ Save best times per level
+* ⭐ Save best times per level - in progress
 * 🖱 Drag-to-slide tiles
 * 🔊 Sound effects
 * 📱 Touch-screen support
