@@ -16,9 +16,6 @@ public class ImageSlidePuzzleMain extends Application {
         stage.setTitle("Sliding Image Puzzle");
         stage.getIcons().add(new Image("slider.png"));
         stage.show();
-
-        ImageSlidePuzzleController controller = loader.getController();
-        controller.initialize(scene);
     }
 
     public static void main(String[] args) {

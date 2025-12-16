@@ -6,10 +6,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ImageSlidePuzzleMain",
+            "request": "launch",
+            "mainClass": "ImageSlidePuzzleMain",
+            "projectName": "ImageSliderPuzzle_ed552022"
+        },
+        {
+            "type": "java",
             "name": "Launch Java Program",
             "request": "launch",
-            "mainClass": "ImageSlidePuzzleFX",
-            "vmArgs": "--module-path \"${workspaceFolder}\\javafx\\lib\" --add-modules javafx.controls,javafx.fxml",
-        },
+            "mainClass": "ImageSlidePuzzleMain",
+            "vmArgs": "--module-path \"${workspaceFolder}\\javafx\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
     ]
 }
