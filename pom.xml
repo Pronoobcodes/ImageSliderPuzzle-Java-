@@ -68,6 +68,15 @@
                     </archive>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>ImageSlidePuzzleMain</mainClass>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

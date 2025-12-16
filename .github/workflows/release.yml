@@ -36,10 +36,16 @@ jobs:
 
       - name: Run jpackage to create EXE
         run: |
-          $jar = Get-ChildItem target -Filter "*ImageSlidePuzzle*.jar" | Select-Object -First 1
+          $jar = Get-ChildItem target -Filter "*ImageSlidePuzzle*.jar" -Not -Name "*sources*" | Select-Object -First 1
           if (-not $jar) { Write-Error 'JAR not found'; exit 1 }
-          # jpackage is available on PATH when using setup-java
-          jpackage --name ImageSlidePuzzle --app-version 1.0.0 --type exe --input target --dest release --main-jar $jar.Name --main-class ImageSlidePuzzleMain --module-path javafx-sdk\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics
+          # Extract JavaFX SDK path
+          $javafxPath = Get-ChildItem javafx -Type d | Select-Object -First 1
+          if (-not $javafxPath) { Write-Error 'JavaFX SDK not found'; exit 1 }
+          # Create input directory for jpackage
+          mkdir jpackage-input -Force | Out-Null
+          Copy-Item $jar.FullName jpackage-input\
+          # Run jpackage with proper paths
+          jpackage --name ImageSlidePuzzle --app-version 1.0.0 --type exe --input jpackage-input --dest release --main-jar $jar.Name --main-class ImageSlidePuzzleMain --module-path "$($javafxPath.FullName)\lib" --add-modules javafx.controls,javafx.fxml,javafx.graphics --win-menu --win-menu-group "ImageSlidePuzzle"
         shell: pwsh
 
       - name: Upload EXE artifact
