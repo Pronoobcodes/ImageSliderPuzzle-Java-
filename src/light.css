@@ -1,18 +1,26 @@
 .root {
-    -fx-background-color: #f4f4f4;
-    -fx-text-fill: #222;
-}
-
-.label {
-    -fx-text-fill: #222;
+    -fx-base: #f0f0f0;
+    -fx-background: #ffffff;
+    -fx-text-fill: #333333;
 }
 
 .button {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #222;
-    -fx-border-color: #ccc;
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #202020;
+    -fx-border-color: #c0c0c0;
 }
 
 .grid-pane {
-    -fx-background-color: #ddd;
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 8;
+}
+
+.preview-box {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #cccccc;
+}
+
+.action-button {
+    -fx-background-color: #0078d4;
+    -fx-text-fill: white;
 }

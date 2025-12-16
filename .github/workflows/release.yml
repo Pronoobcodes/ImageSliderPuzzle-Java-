@@ -1,0 +1,48 @@
+name: Build and package (jpackage)
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch: {}
+
+jobs:
+  build-windows-exe:
+    name: Build EXE on Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java (Temurin 21)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Build Jar with Maven
+        run: mvn -B -DskipTests package
+
+      - name: Download JavaFX SDK (Windows x64)
+        run: |
+          $url = 'https://download2.gluonhq.com/openjfx/21/windows/openjfx-21_windows-x64_bin-sdk.zip'
+          Invoke-WebRequest -Uri $url -OutFile javafx.zip
+          Expand-Archive -Path javafx.zip -DestinationPath javafx
+          # move to simple folder
+          $dirs = Get-ChildItem javafx | Where-Object {$_.PSIsContainer}
+          if ($dirs.Length -gt 0) { Move-Item $dirs[0].FullName javafx-sdk }
+
+      - name: Run jpackage to create EXE
+        run: |
+          $jar = Get-ChildItem target -Filter "*ImageSlidePuzzle*.jar" | Select-Object -First 1
+          if (-not $jar) { Write-Error 'JAR not found'; exit 1 }
+          # jpackage is available on PATH when using setup-java
+          jpackage --name ImageSlidePuzzle --app-version 1.0.0 --type exe --input target --dest release --main-jar $jar.Name --main-class ImageSlidePuzzleMain --module-path javafx-sdk\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics
+        shell: pwsh
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: release

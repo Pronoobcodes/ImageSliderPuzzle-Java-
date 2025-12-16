@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ImageSlidePuzzleController">
+    <top>
+        <VBox spacing="5">
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <padding>
+                    <Insets top="8" right="8" bottom="8" left="8"/>
+                </padding>
+                <Button fx:id="loadBtn" text="Load Image" styleClass="action-button"/>
+                <Label text="Level:"/>
+                <ComboBox fx:id="levelBox" prefWidth="100"/>
+                <Button fx:id="prevBtn" text="Prev" styleClass="nav-button"/>
+                <Button fx:id="nextBtn" text="Next" styleClass="nav-button"/>
+                <Button fx:id="shuffleBtn" text="Shuffle" styleClass="action-button"/>
+                <Button fx:id="resetBtn" text="Reset" styleClass="action-button"/>
+                <ToggleButton fx:id="themeToggle" text="Dark Mode"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="movesLabel" text="Moves: 0"/>
+                <Label fx:id="timeLabel" text="Time: 00:00"/>
+            </HBox>
+            <Label fx:id="noteLabel" textFill="ORANGE">
+                <padding>
+                    <Insets top="0" right="8" bottom="4" left="8"/>
+                </padding>
+            </Label>
+        </VBox>
+    </top>
+    
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <GridPane fx:id="gridPane" hgap="1" vgap="1" styleClass="grid-pane"/>
+        </ScrollPane>
+    </center>
+    
+    <right>
+        <VBox spacing="10" styleClass="preview-box">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Original Image:"/>
+            <ImageView fx:id="originalPreview" fitWidth="250" preserveRatio="true"/>
+        </VBox>
+    </right>
+</BorderPane>
