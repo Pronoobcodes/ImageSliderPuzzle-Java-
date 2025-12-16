@@ -23,6 +23,7 @@ jobs:
 
       - name: Build Jar with Maven
         run: mvn -B -DskipTests package
+        shell: pwsh
 
       - name: Download JavaFX SDK (Windows x64)
         run: |
